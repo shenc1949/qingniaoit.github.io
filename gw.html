@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>青鸟IT工作室 - 官方网站</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        dark: '#1D2129',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            /* 动态流动渐变背景动画（优化移动端性能） */
+            .animate-gradient-flow {
+                background-size: 400% 400%;
+                animation: gradientFlow 15s ease infinite;
+                will-change: background-position;
+            }
+            @keyframes gradientFlow {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+            /* 公告滚动动画（适配移动端速度） */
+            .animate-notice-scroll {
+                animation: noticeScroll 25s linear infinite;
+                will-change: transform;
+            }
+            @keyframes noticeScroll {
+                0% { transform: translateX(100%); }
+                100% { transform: translateX(-100%); }
+            }
+            /* 移动端菜单显隐 */
+            .menu-active {
+                max-height: 500px;
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden text-white">
+    <!-- 动态流动渐变背景层（优化移动端层级） -->
+    <div class="fixed inset-0 bg-gradient-to-br from-primary/90 via-secondary/80 to-dark/90 animate-gradient-flow -z-10"></div>
+    
+    <!-- 网站头部（移动端适配核心：弹性布局+自适应间距） -->
+    <header class="py-4 px-5 bg-dark/30 backdrop-blur-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- 工作室LOGO+名称（移动端缩小尺寸） -->
+            <div class="flex items-center gap-2">
+                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                <h1 class="text-xl font-bold">青鸟IT工作室</h1>
+            </div>
+
+            <!-- 桌面端导航（移动端隐藏） -->
+            <nav class="hidden md:flex gap-6 text-sm">
+                <a href="#home" class="hover:text-secondary transition-colors py-2">首页</a>
+                <a href="#service" class="hover:text-secondary transition-colors py-2">服务</a>
+                <a href="#about" class="hover:text-secondary transition-colors py-2">关于我们</a>
+                <a href="#contact" class="hover:text-secondary transition-colors py-2">联系我们</a>
+            </nav>
+
+            <!-- 移动端菜单按钮（桌面端隐藏） -->
+            <button id="menuBtn" class="md:hidden text-xl focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- 移动端导航菜单（默认隐藏，点击按钮显示） -->
+        <nav id="mobileMenu" class="md:hidden max-h-0 opacity-0 overflow-hidden transition-all duration-300 bg-dark/50 backdrop-blur-sm mt-2">
+            <div class="flex flex-col gap-1 px-5 py-2">
+                <a href="#home" class="hover:text-secondary transition-colors py-3 px-2 rounded">首页</a>
+                <a href="#service" class="hover:text-secondary transition-colors py-3 px-2 rounded">服务</a>
+                <a href="#about" class="hover:text-secondary transition-colors py-3 px-2 rounded">关于我们</a>
+                <a href="#contact" class="hover:text-secondary transition-colors py-3 px-2 rounded">联系我们</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 公告模块（移动端优化：缩小高度、调整字体、优化滚动速度） -->
+    <section class="py-1.5 bg-dark/60 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="flex items-center gap-2 whitespace-nowrap animate-notice-scroll text-sm" id="notice-content">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path>
+                </svg>
+                <span>正在加载公告...</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- 首页主内容（移动端核心优化：间距、字体、组件尺寸自适应） -->
+    <main class="py-10 px-5 text-white">
+        <!-- 首页横幅（移动端缩小字体、减少间距） -->
+        <section id="home" class="max-w-7xl mx-auto text-center mb-16">
+            <h2 class="text-2xl md:text-4xl font-bold mb-4 leading-tight">专注技术开发，打造优质产品</h2>
+            <p class="text-base md:text-xl text-white/80 max-w-2xl mx-auto mb-8 px-2">
+                青鸟IT工作室，深耕软件开发、UI设计、技术定制领域，为客户提供高效、可靠的技术解决方案
+            </p>
+            <button class="px-6 py-2.5 bg-white text-primary rounded-lg text-base font-semibold hover:bg-secondary hover:text-white transition-all shadow-lg w-[70%] md:w-auto">
+                立即咨询
+            </button>
+        </section>
+
+        <!-- 服务模块（移动端优化：单列布局、调整内边距、增大触控区域） -->
+        <section id="service" class="max-w-7xl mx-auto mb-16">
+            <h3 class="text-2xl md:text-3xl font-bold text-center mb-10">核心服务</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 服务1：软件开发 -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+                    <svg class="w-12 h-12 mb-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                    <h4 class="text-xl font-bold mb-3">软件开发</h4>
+                    <p class="text-white/80 text-sm">
+                        定制化程序开发、移动端应用开发、小程序开发，基于客户需求打造专属技术产品
+                    </p>
+                </div>
+                <!-- 服务2：UI设计 -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+                    <svg class="w-12 h-12 mb-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 0 1 2.828 0L16 16m-2-2l1.586-1.586a2 2 0 0 1 2.828 0L20 14m-6-6h.01M6 20h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"></path>
+                    </svg>
+                    <h4 class="text-xl font-bold mb-3">UI/UX设计</h4>
+                    <p class="text-white/80 text-sm">
+                        极简现代风格界面设计、产品原型设计、用户体验优化，打造视觉与体验兼具的作品
+                    </p>
+                </div>
+                <!-- 服务3：技术定制 -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+                    <svg class="w-12 h-12 mb-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                    <h4 class="text-xl font-bold mb-3">技术定制</h4>
+                    <p class="text-white/80 text-sm">
+                        个性化技术解决方案、代码调试与优化、项目二次开发，解决各类技术难题
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于我们（移动端优化：内边距、字体大小） -->
+        <section id="about" class="max-w-7xl mx-auto mb-16">
+            <h3 class="text-2xl md:text-3xl font-bold text-center mb-10">关于青鸟</h3>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 md:p-8">
+                <p class="text-base md:text-lg text-white/90 leading-relaxed mb-4">
+                    青鸟IT工作室由一群热爱技术的开发者与设计师组成，秉持「简洁、高效、优质」的理念，专注于为个人与企业提供专业的技术服务。
+                </p>
+                <p class="text-base md:text-lg text-white/90 leading-relaxed">
+                    我们擅长iApp v3软件开发、UI设计、技术定制等领域，注重细节与用户体验，力求用技术为客户创造价值，成为客户信赖的技术合作伙伴。
+                </p>
+            </div>
+        </section>
+
+        <!-- 联系我们（移动端优化：布局、间距、字体） -->
+        <section id="contact" class="max-w-7xl mx-auto">
+            <h3 class="text-2xl md:text-3xl font-bold text-center mb-10">联系我们</h3>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 md:p-8 text-center">
+                <p class="text-base md:text-lg text-white/90 mb-6">期待与您合作，欢迎随时联系</p>
+                <div class="flex flex-col gap-4 text-sm md:text-base">
+                    <a href="#" class="hover:text-secondary transition-colors py-2">邮箱：3803389721@qq.com</a>
+                    <a href="#" class="hover:text-secondary transition-colors py-2">微信：shenc1949</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚（移动端优化：缩小内边距、字体） -->
+    <footer class="py-4 px-5 bg-dark/70 text-white text-center text-sm">
+        <div class="max-w-7xl mx-auto">
+            <p>© 2026 青鸟IT工作室 版权所有</p>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换逻辑
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('menu-active');
+            // 切换菜单图标（汉堡/叉号）
+            menuBtn.innerHTML = mobileMenu.classList.contains('menu-active')
+                ? `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                   </svg>`
+                : `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                   </svg>`;
+        });
+
+        // 公告内容获取（保留原功能，适配移动端）
+        async function getNoticeContent() {
+            const noticeUrl = 'https://sharechain.qq.com/6fdcf3fc8b9726a5dcf14c73ad13e980?qq_aio_chat_type=2';
+            const noticeElement = document.getElementById('notice-content');
+            try {
+                const response = await fetch(noticeUrl);
+                const htmlText = await response.text();
+                const reg = /\[gw_公告：(.*?)\]/;
+                const matchResult = htmlText.match(reg);
+                
+                if (matchResult && matchResult[1]) {
+                    noticeElement.innerHTML = `
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path>
+                        </svg>
+                        <span>${matchResult[1]}</span>
+                    `;
+                } else {
+                    noticeElement.innerHTML = `
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path>
+                        </svg>
+                        <span>暂无最新公告</span>
+                    `;
+                }
+            } catch (error) {
+                console.error('公告加载失败：', error);
+                noticeElement.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path>
+                    </svg>
+                    <span>公告加载失败，刷新重试</span>
+                `;
+            }
+        }
+
+        window.onload = () => {
+            getNoticeContent();
+            // 移动端点击导航链接自动关闭菜单
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('menu-active');
+                    menuBtn.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                   </svg>`;
+                });
+            });
+        };
+    </script>
+</body>
+</html>
